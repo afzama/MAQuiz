@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="./assets/style.css"/>
+
+<title>Europe Quiz</title>
+</head>
+<body>
+    <header class="header">
+        <h1>Europe Quiz</h1>
+        <nav> 
+            <ul>
+            <li>High Scores</li>
+            <li>Time Remaining</li>
+            </ul>
+        </nav>
+        <p>Instructions: This quiz is about Netherlands. The author of quiz grew up in the Netherlands, and now lives in Canada.</p>
+        <p>You will have 45 seconds to answer 5 questions. Once ready, enter your name and click start button.</p>
+        <form id="username"> Your Name: <input type="text"> </form>
+        <timer id="countdown"> Timer: </timer>
+        <button id="startbtn"> Start Quiz </button>
+    </header>
+
+<main id="quiz">
+    <section>
+    <div class="modal-container" id="score-modal">
+        <div class="modal-content-container"> 
+            <div class="grade-details">
+                <p>Attempts: 5</p>
+                <p>Wrong Answers: <span id="wrong-answers"></span></p>
+                <p>Right Answers: <span id="right-answers"></span></p> 
+                <p>Grade: <span id="grade-percentage"></span></p>
+                <p><span id="remarks"></span></p> 
+            </div>
+            <div class="modal-button-container">
+                <button onclick="closeScoreModal()">Continue</button>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <container class="game-quiz-container">
+        <section>
+        <div class="game-detail">
+            <h1>Score: <span id="player-score"></span>/5</h1>
+            <h1>Question:<span id="question-number"></span>/5</h1>
+        </div> 
+
+        <div class="game-question-container">
+            <h1 id="display-question"></h1>
+        </div>
+        <div class="game-options-container"></div>
+        <div class="modal-container" id="option-modal"></div>
+        <div class="modal-content-container"></div>
+        <h1>Please Pick an answer</h1>
+        <div class="modal-button-container"><button onclick="closeOptionModal()">Continue</button></div>
+        <div class="next-button-container"><button onclick="handleNextQuestion()">Next Question</button></div>
+        </section>
+
+        <section>
+        <span>
+        <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
+        <label for="option-one" class="option" id="option-one-label"></label>
+        </span>
+        <span>
+        <input type="radio" id="option-two" name="option" class="radio" value="optionB" />
+        <label for="option-two" class="option" id="option-two-label"></label>
+        </span>
+        <span>
+        <input type="radio" id="option-three" name="option" class="radio" value="optionC" />
+        <label for="option-three" class="option" id="option-three-label"></label>
+        </span>
+        <span>
+        <input type="radio" id="option-four" name="option" class="radio" value="optionD" />
+        <label for="option-four" class="option" id="option-four-label"></label>
+        </span>
+        </section>
+
+        <section>
+            <div id="question">
+            <Question> What is the capital of Netherlands? </Question>
+            <li> Amsterdam </li>
+            <li> Leiden </li>
+            <li> Rotterdam </li>
+            <li> Den Haag </li>
+            <button id="btn" class="btn">Submit</button>
+            </div id="end-question">
+
+            <div id="question">
+            <Question> What sports are the dutch best known for? </Question>
+            <li> Biking </li>
+            <li> Swimming </li>
+            <li> Hockey </li>
+            <li> Dancing </li>
+            <button id="btn" class="btn">Submit</button>
+            </div id="end-question">
+
+            <div id="question">
+            <Question> Which of the following is not a dutch artist? </Question>
+            <li> Picasso </li>
+            <li> Van Gogh </li>
+            <li> Rembrandt </li>
+            <li> Vermeer </li>
+            <button id="btn" class="btn">Submit</button>
+            </div id="end-question">
+
+            <div id="question">
+            <Question> Which of the following is not a drink from holland? </Question>
+            <li> Heineken </li>
+            <li> Grolsch </li>
+            <li> Belgian Moon </li>
+            <li> Amstel </li>
+            <button id="btn" class="btn">Submit</button>
+            </div id="end-question">
+
+            <div id="question">
+            <Question> Fill in the blank. Amsterdam is known for having the most ____ in closest square footage. </Question>
+            <li> Coffee Shops </li>
+            <li> Museums </li>
+            <li> Canals </li>
+            <li> Night Clubs </li>
+            <button id="btn" class="btn">Submit</button>
+            </div id="end-question">
+        </section>
+    </container>
+
+        <section>
+        <Score id="show-score">View High Score</Score>
+        </section>
+
+</main>
+    <script src="script.js"></script>
+</body>
+</html>
