@@ -21,7 +21,8 @@
         <p>You will have 45 seconds to answer 5 questions. Once ready, enter your name and click start button.</p>
         <form id="username"> Your Name: <input type="text"> </form>
         <timer id="countdown"> Timer: </timer>
-        <button id="startbtn"> Start Quiz </button>
+        <button onclick="countdown()">Start Timer</button> 
+        <!-- <div id="startbtn"> Start Quiz </div> -->
     </header>
 
 <main id="quiz">
@@ -60,7 +61,7 @@
         <div class="next-button-container"><button onclick="handleNextQuestion()">Next Question</button></div>
         </section>
 
-        <section>
+        <!-- <section>
         <span>
         <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
         <label for="option-one" class="option" id="option-one-label"></label>
@@ -77,53 +78,48 @@
         <input type="radio" id="option-four" name="option" class="radio" value="optionD" />
         <label for="option-four" class="option" id="option-four-label"></label>
         </span>
-        </section>
+        </section> -->
 
         <section>
-            <div id="question">
+            <div id="question0">
             <Question> What is the capital of Netherlands? </Question>
-            <li> Amsterdam </li>
-            <li> Leiden </li>
-            <li> Rotterdam </li>
-            <li> Den Haag </li>
-            <button id="btn" class="btn">Submit</button>
-            </div id="end-question">
+            <button onclick="checkAns()" id="btn"> Amsterdam </button>
+            <button onclick="checkAns()" id="btn"> Leiden </button>
+            <button onclick="checkAns()" id="btn"> Rotterdam </button>
+            <button onclick="checkAns()" id="btn"> Den Haag </button>
+            </div id="end-question0">
 
-            <div id="question">
+            <div id="question1">
             <Question> What sports are the dutch best known for? </Question>
-            <li> Biking </li>
-            <li> Swimming </li>
-            <li> Hockey </li>
-            <li> Dancing </li>
-            <button id="btn" class="btn">Submit</button>
-            </div id="end-question">
+            <button onclick="checkAns()" id="btn"> Biking </button>
+            <button onclick="checkAns()" id="btn"> Swimming </button>
+            <button onclick="checkAns()" id="btn"> Hockey </button>
+            <button onclick="checkAns()" id="btn"> Dancing </button>
+            </div id="end-question1">
 
-            <div id="question">
+            <div id="question2">
             <Question> Which of the following is not a dutch artist? </Question>
-            <li> Picasso </li>
-            <li> Van Gogh </li>
-            <li> Rembrandt </li>
-            <li> Vermeer </li>
-            <button id="btn" class="btn">Submit</button>
-            </div id="end-question">
+            <button onclick="checkAns()" id="btn"> Picasso </button>
+            <button onclick="checkAns()" id="btn"> Van Gogh </button>
+            <button onclick="checkAns()" id="btn"> Rembrandt </button>
+            <button onclick="checkAns()" id="btn"> Vermeer </button>
+            </div id="end-question2">
 
-            <div id="question">
+            <div id="question3">
             <Question> Which of the following is not a drink from holland? </Question>
-            <li> Heineken </li>
-            <li> Grolsch </li>
-            <li> Belgian Moon </li>
-            <li> Amstel </li>
-            <button id="btn" class="btn">Submit</button>
-            </div id="end-question">
+            <button onclick="checkAns()" id="btn"> Heineken </button>
+            <button onclick="checkAns()" id="btn"> Grolsch </button>
+            <button onclick="checkAns()" id="btn"> Belgian Moon </button>
+            <button onclick="checkAns()" id="btn"> Amstel </button>
+            </div id="end-question3">
 
-            <div id="question">
+            <div id="question4">
             <Question> Fill in the blank. Amsterdam is known for having the most ____ in closest square footage. </Question>
-            <li> Coffee Shops </li>
-            <li> Museums </li>
-            <li> Canals </li>
-            <li> Night Clubs </li>
-            <button id="btn" class="btn">Submit</button>
-            </div id="end-question">
+            <button onclick="checkAns()" id="btn"> Coffee Shops </button>
+            <button onclick="checkAns()" id="btn"> Museums </button>
+            <button onclick="checkAns()" id="btn"> Canals </button>
+            <button onclick="checkAns()" id="btn"> Night Clubs </button>
+            </div id="end-question4">
         </section>
     </container>
 

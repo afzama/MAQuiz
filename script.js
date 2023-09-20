@@ -13,7 +13,27 @@ var questionDiv = {
     userName: ``,
     highScores: ``,
 };
+var currentQ = 0;
 
+//set timer
+let timer;
+function countdown() {
+    let timeLeft = totalTime;
+    timerEl = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timerEl);
+            document.getElementById('countdown').innerHTML = 'Time\'s up!';
+        } else {
+            document.getElementById('countdown').innerHTML = 'Time left:' + timeLeft + 'seconds';
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+//User Information
+
+userName.textContent = data[i].name;
+//quiz section
 let question = [
     {
         question: 'What is the capital of Netherlands?',
@@ -41,3 +61,11 @@ let question = [
         answer: 'Museums',
     }
 ]
+let currQuestion = 0
+let score = 0
+//Load first Question
+function loadQuestion() {
+    document.querySelector("game h1").textContent(questions)
+};
+
+
