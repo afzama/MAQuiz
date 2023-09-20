@@ -18,9 +18,10 @@ function countdown() {
     timer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(timer);
-            document.getElementById('countdown').innerHTML = 'Time\'s up!';
+            document.getElementById('countdown').innerText = 'Time\'s up!';
+            endQuiz();
         } else {
-            document.getElementById('countdown').innerHTML = 'Time left:' + timeLeft + 'seconds';
+            document.getElementById('countdown').innerText = 'Time left:' + timeLeft + 'seconds';
             timeLeft--;
         }
     }, 1000);
@@ -29,16 +30,18 @@ function countdown() {
 //User Information
 let userName;
 function startQuiz() {
-    getuserName();
-    countdown();
-}
-function getuserName() {
-    userName = userNameEL.value;
-    console.log(userName);
+    userName = document.getElementById('username').value;
+    if (!userName) {
+        alert('Please enter your name before starting the quiz.');
+        return;
+    }
+    document.getElementById('username-display').innerText = 'Your Name: ' + userName;
+    showQuestion(currentQuestion);
+    countdown(); // Start the timer when quiz starts
 }
 
-//quiz section
-let question = [
+// Display a question
+let questions = [
     {
         question: 'What is the capital of Netherlands?',
         options: ['Amsterdam', 'Leiden', 'Rotterdam', 'Den Haag'],
@@ -61,67 +64,65 @@ let question = [
     },
     {
         question: 'Fill in the blank. Amsterdam is known for having the most ____ in closest square footage.',
-        options: ['Coffee Shops', 'Museums', 'Canals', 'Nigh Clubs'],
+        options: ['Coffee Shops', 'Museums', 'Canals', 'Night Clubs'],
         correctAnswer: 'Museums',
     }
-]
+];
+function showQuestion(questionIndex) {
+    const questionContainer = document.getElementById('display-question');
+    const currentQuestion = questions[questionIndex];
 
-//Display a question
-function displayQuestion(index) {
-    questionContainerEl.innerHTML = question[index].question + '<br>';
-    for (let i = 0; i < question[index].options.length; i++) {
-        questionContainerEl.innerHTML += `<input type="radio" name="answer" value="${questions[index].options[i]}"> ${questions[index].options[i]}<br>`;
+    if (currentQuestion) {
+        questionContainer.innerText = currentQuestion.question;
+        const optionsContainer = document.getElementById('game-options-container');
+        optionsContainer.innerHTML = '';  // Clear previous options
+
+        // Create buttons for each option
+        currentQuestion.options.forEach((option) => {
+            const button = document.createElement('button');
+            button.innerText = option;
+            button.onclick = function () {
+                checkAnswer(option, currentQuestion.correctAnswer);
+            };
+            optionsContainer.appendChild(button);
+        });
     }
-    questionContainerEl.innerHTML += '<button onclick="checkAnswer()">Submit Answer</button>';
-};
+}
+
 
 //Check the user's answer
-function checkAnswer() {
-    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    if (selectedAnswer) {
-        const userAnswer = selectedAnswer.value;
-        const correctAnswer = questions[questionIndex].correctAnswer;
-
-        if (userAnswer === correctAnswer) {
-            correctAnswers++;
-        }
-
-        questionIndex++;
-
-        if (questionIndex < questions.length) {
-            displayQuestion(questionIndex);
-        } else {
-            displayScore();
-        }
-    } else {
-        alert('Please select an answer.');
+function checkAnswer(selectedOption, correctAnswer) {
+    if (selectedOption === correctAnswer) {
+        score++;
     }
-};
+    currentQuestion++;
+    // Show the next question or end the quiz
+    if (currentQuestion < questions.length) {
+        showQuestion(currentQuestion);
+    } else {
+        endQuiz();
+    }
+}
+
 // Display the user's score
-function displayScore() {
+function endQuiz() {
     clearInterval(timer);
-    questionContainerEl.innerHTML = 'Quiz completed! Your score is: ' + correctAnswers + ' out of ' + questions.length;
-    scoreEl.innerHTML = 'Your score: ' + correctAnswers + ' out of ' + questions.length;
-    attempts++;
-
-    if (attempts < maxAttempts) {
-        questionContainerEl.innerHTML += '<br><button onclick="restartQuiz()">Restart Quiz</button>';
-    } else {
-        questionContainerEl.innerHTML += '<br>Maximum attempts reached. Thank you for playing!';
+    const modal = document.getElementById('score-modal');
+    if (!modal) {
+        console.error("Element with ID 'score-modal' not found.");
+        return;
     }
+    modal.style.display = 'block';
+    document.getElementById('right-answers').innerText = score;
+    document.getElementById('player-score').innerText = score + '/5';
 }
-
-// Restart the quiz for a new attempt
-function restartQuiz() {
-    questionIndex = 0;
-    correctAnswers = 0;
-    displayQuestion(questionIndex);
-    countdown();
-}
-
-// Start the quiz
-function startQuiz() {
-    getuserName();
-    displayQuestion(questionIndex);
-    countdown();
-}
+// Display reattempt option
+const reattemptButton = document.createElement('button');
+reattemptButton.innerText = 'Reattempt Quiz';
+reattemptButton.onclick = function () {
+    modal.style.display = 'none';
+    currentQuestion = 0;
+    score = 0;
+    startQuiz();  // Restart the quiz
+};
+document.getElementById('player-score').appendChild(reattemptButton);
