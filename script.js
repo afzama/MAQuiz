@@ -2,12 +2,12 @@
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('quiz');
 var totalTime = 45;
-var userName = document.getElementById('username');
+var userNameEL = document.getElementById('username');
 var saveBtn = document.getElementById('btn');
 var endQuestion = document.getElementById('end-question');
 var highScores = document.querySelector('nav');
 var quizSection = document.querySelector('quiz');
-var gameStart = document.getElementById('startbox');
+
 var results = [];
 var questionDiv = {
     userName: ``,
@@ -31,8 +31,16 @@ function countdown() {
 }
 
 //User Information
+let userName;
+function startQuiz() {
+    getuserName();
+    countdown()
+}
+function getuserName() {
+    UserName = userNameEL.value;
+    console.log(userName);
+}
 
-userName.textContent = data[i].name;
 //quiz section
 let question = [
     {
