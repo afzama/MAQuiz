@@ -6,13 +6,15 @@ var scoreEl = document.getElementById('score');
 var questionContainerEl = document.getElementById('question-container');
 var questionIndex = 0;
 var correctAnswers = 0;
+var wrongAnswers = 0;
 var maxAttempts = 3;
 var attempts = 0;
 let currentQuestion = 0;
 let score = 0;
+let timer; // Timer variable
+let userName; //User information
 
-//set timer
-let timer;
+//set timer & disable when time up
 function countdown() {
     let timeLeft = totalTime;
     timer = setInterval(() => {
@@ -20,6 +22,7 @@ function countdown() {
             clearInterval(timer);
             document.getElementById('countdown').innerText = 'Time\'s up!';
             endQuiz();
+            disableOptions();
         } else {
             document.getElementById('countdown').innerText = 'Time left:' + timeLeft + 'seconds';
             timeLeft--;
@@ -27,8 +30,20 @@ function countdown() {
     }, 1000);
 }
 
+function disableOptions() {
+    const options = document.querySelectorAll('#game-options-container button');
+    options.forEach(option => {
+        option.disabled = true;  // Disable the option buttons
+    });
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById('countdown').innerText = 'Time\'s up!';
+        endQuiz();
+        disableOptions();  // Disable options when time's up
+    }
+}
+
 //User Information
-let userName;
 function startQuiz() {
     userName = document.getElementById('username').value;
     if (!userName) {
@@ -94,6 +109,8 @@ function showQuestion(questionIndex) {
 function checkAnswer(selectedOption, correctAnswer) {
     if (selectedOption === correctAnswer) {
         score++;
+    } else {
+        wrongAnswers++;  // Increment wrong answers counter
     }
     currentQuestion++;
     // Show the next question or end the quiz
@@ -114,6 +131,7 @@ function endQuiz() {
     }
     modal.style.display = 'block';
     document.getElementById('right-answers').innerText = score;
+    document.getElementById('wrong-answers').innerText = wrongAnswers;  // Display wrong answers
     document.getElementById('player-score').innerText = score + '/5';
 }
 // Display reattempt option
@@ -126,3 +144,11 @@ reattemptButton.onclick = function () {
     startQuiz();  // Restart the quiz
 };
 document.getElementById('player-score').appendChild(reattemptButton);
+// Add function to reset the quiz
+function reattemptQuiz() {
+    modal.style.display = 'none';
+    currentQuestion = 0;
+    score = 0;
+    wrongAnswers = 0;  // Reset wrong answers count
+    startQuiz();
+}
